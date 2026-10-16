@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Área do cliente · Um Pé de IDEIA</title>
+<meta name="description" content="Envie sua solicitação de orçamento com fotos, vídeos e PDFs e acompanhe a resposta do arquiteto.">
+<meta name="theme-color" content="#f7f5f1">
+<link rel="icon" href="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="cliente">
+
+<header class="top" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg" alt="">
+      <span><b>Um Pé de IDEIA</b><span class="lab">Área do cliente</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html#projetos">Galeria</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#contato">Contato</a>
+      <a class="btn sm out keep" href="index.html">← Site</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page"><div class="wrap">
+
+  <!-- ENTRADA ------------------------------------------------------------ -->
+  <section id="login" class="sec tight">
+    <div class="login">
+      <div class="art">
+        <img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792139949/WhatsApp_Image_2026-10-16_at_05.34.37.jpg" alt="Residência contemporânea do portfólio" loading="lazy">
+        <div class="ov">
+          <span class="lab">Área do cliente</span>
+          <h2>Acompanhe seu projeto em cada etapa.</h2>
+          <p>Envie sua solicitação, compartilhe arquivos e acompanhe as respostas da equipe.</p>
+          <ul>
+            <li>Fotos, vídeos e documentos no mesmo pedido</li>
+            <li>Status e respostas reunidos na sua conta</li>
+            <li>Acesso seguro com e-mail e senha</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form" id="auth">
+
+        <!-- entrar ......................................................... -->
+        <div data-v="entrar">
+          <span class="lab ac lab-line">Entrar</span>
+          <h2 class="tit">Bem-vindo de volta</h2>
+          <p class="sub">Acesse com o e-mail e a senha cadastrados para abrir o seu painel.</p>
+          <form id="fEntrar" novalidate>
+            <label><span class="lab">E-mail</span>
+              <input type="email" name="email" required autocomplete="username" placeholder="voce@email.com"></label>
+            <label>
+              <span class="lab lab-row">Senha
+                <button type="button" class="link" data-go="recuperar">Esqueci minha senha</button></span>
+              <span class="pw">
+                <input type="password" name="senha" required autocomplete="current-password" placeholder="Sua senha">
+                <button type="button" class="eye" aria-label="Mostrar senha">
+                  <svg viewBox="0 0 24 24"><path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </span>
+            </label>
+            <p class="msg err" id="entrarErr" role="alert"></p>
+            <p class="msg ok" id="entrarOk" role="status"></p>
+            <button class="btn wide lg" type="submit">
+              Entrar no meu painel
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </button>
+          </form>
+          <p class="troca">Ainda não tem conta? <button type="button" class="link" data-go="criar">Criar conta</button></p>
+        </div>
+
+        <!-- criar conta .................................................... -->
+        <div data-v="criar" hidden>
+          <span class="lab ac lab-line">Criar conta</span>
+          <h2 class="tit">Vamos começar</h2>
+          <p class="sub">Leva menos de um minuto e dá acesso a todo o acompanhamento do projeto.</p>
+          <form id="fCriar" novalidate>
+            <label><span class="lab">Seu nome completo</span>
+              <input name="nome" required autocomplete="name" placeholder="Maria Aparecida Souza"></label>
+            <div class="row-2">
+              <label><span class="lab">E-mail</span>
+                <input type="email" name="email" required autocomplete="username" placeholder="voce@email.com"></label>
+              <label><span class="lab">Telefone <span class="opc">(opcional)</span></span>
+                <input name="fone" autocomplete="tel" placeholder="(11) 98291-6734"></label>
+            </div>
+            <label><span class="lab">Criar senha</span>
+              <span class="pw">
+                <input type="password" name="senha" required autocomplete="new-password" placeholder="Mínimo de 6 caracteres">
+                <button type="button" class="eye" aria-label="Mostrar senha">
+                  <svg viewBox="0 0 24 24"><path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </span>
+              <span class="forca" id="forca"><i></i><i></i><i></i><b>Força da senha</b></span>
+            </label>
+            <label><span class="lab">Repetir a senha</span>
+              <input type="password" name="senha2" required autocomplete="new-password" placeholder="Digite a senha outra vez"></label>
+            <p class="msg err" id="criarErr" role="alert"></p>
+            <button class="btn wide lg" type="submit">Criar minha conta</button>
+          </form>
+          <p class="troca">Já tem cadastro? <button type="button" class="link" data-go="entrar">Entrar</button></p>
+        </div>
+
+        <!-- recuperar: pedir e-mail ........................................ -->
+        <div data-v="recuperar" hidden>
+          <span class="lab ac lab-line">Recuperar acesso</span>
+          <h2 class="tit">Esqueceu a senha?</h2>
+          <p class="sub">Informe o e-mail da sua conta e enviaremos um código de verificação para criar uma nova senha.</p>
+          <form id="fRecuperar" novalidate>
+            <label><span class="lab">E-mail da conta</span>
+              <input type="email" name="email" required autocomplete="email" placeholder="voce@email.com"></label>
+            <p class="msg err" id="recErr" role="alert"></p>
+            <button class="btn wide lg" type="submit">Enviar código</button>
+          </form>
+          <p class="troca"><button type="button" class="link" data-go="entrar">← Voltar para o acesso</button></p>
+        </div>
+
+        <!-- recuperar: código + nova senha ................................. -->
+        <div data-v="redefinir" hidden>
+          <span class="lab ac lab-line">Recuperar acesso</span>
+          <h2 class="tit">Crie uma nova senha</h2>
+          <p class="sub">Enviamos um código de 6 dígitos para o e-mail <strong id="destino">da sua conta</strong>.</p>
+
+          <div class="mail-mock">
+            <div class="mm-top"><span class="lab">Mensagem enviada</span><span class="lab">agora</span></div>
+            <b>Seu código de verificação</b>
+            <span class="codigo" id="codigo">000000</span>
+            <p>Válido por 15 minutos. Se não foi você quem pediu, ignore esta mensagem.</p>
+          </div>
+
+          <form id="fRedefinir" novalidate>
+            <label><span class="lab">Conta</span>
+              <input type="email" id="usuarioRed" name="usuario" autocomplete="username" readonly tabindex="-1"></label>
+            <label><span class="lab">Código de verificação</span>
+              <input name="codigo" required inputmode="numeric" maxlength="7" autocomplete="one-time-code" placeholder="000000" class="cod-in"></label>
+            <label><span class="lab">Nova senha</span>
+              <span class="pw">
+                <input type="password" name="senha" required autocomplete="new-password" placeholder="Mínimo de 6 caracteres">
+                <button type="button" class="eye" aria-label="Mostrar senha">
+                  <svg viewBox="0 0 24 24"><path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </span>
+            </label>
+            <label><span class="lab">Repetir a nova senha</span>
+              <input type="password" name="senha2" required autocomplete="new-password" placeholder="Digite a senha outra vez"></label>
+            <p class="msg err" id="redErr" role="alert"></p>
+            <button class="btn wide lg" type="submit">Salvar nova senha</button>
+          </form>
+          <p class="troca">Não recebeu? <button type="button" class="link" id="reenviar">Enviar outro código</button></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PAINEL ------------------------------------------------------------- -->
+  <section id="painel" hidden>
+
+
+    <div class="panel-top">
+      <div class="user">
+        <span class="avatar" id="ini">—</span>
+        <div><b id="ola">Olá</b><span class="lab" id="mail"></span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn soft sm" href="index.html#projetos">Ver projetos</a>
+        <button class="btn out sm" id="sair" type="button">Sair</button>
+      </div>
+    </div>
+
+    <div class="dash">
+
+      <!-- formulário ---------------------------------------------------- -->
+      <div class="sticky">
+        <div class="sheet pad-lg tape">
+          <span class="lab ac">Nova solicitação</span>
+          <h3 style="font-family:var(--f-disp);font-weight:300;font-size:1.55rem;margin:8px 0 18px">Conte a sua ideia</h3>
+
+          <form id="fReq" novalidate>
+            <label><span class="lab">Tipo de projeto</span>
+              <select name="tipo">
+                <option>Residência (obra nova)</option>
+                <option>Reforma e interiores</option>
+                <option>Espaço comercial</option>
+                <option>Consultoria avulsa</option>
+              </select>
+            </label>
+
+            <label><span class="lab">Cidade ou endereço</span><input name="local" required placeholder="Cidade · Estado"></label>
+
+            <label><span class="lab">Descreva o que você imagina</span>
+              <textarea name="desc" required minlength="12" placeholder="O que você gostaria de construir, reformar ou melhorar?"></textarea></label>
+
+            <!-- ANEXOS -->
+            <div>
+              <span class="lab">Anexos · fotos, vídeos e PDFs</span>
+              <div class="drop" id="drop">
+                <input type="file" id="file" multiple accept="image/*,video/*,application/pdf" aria-label="Escolher arquivos">
+                <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></span>
+                <b>Arraste os arquivos aqui ou clique para escolher</b>
+                <small>Fotos, vídeos, plantas e referências · até 25 MB por arquivo</small>
+                <div class="chips-t"><span>JPG · PNG</span><span>MP4 · MOV</span><span>PDF</span></div>
+              </div>
+              <div class="bar-p" id="prog" hidden><i></i></div>
+              <div class="files" id="files"></div>
+              <p class="msg err" id="fileErr" role="alert"></p>
+            </div>
+
+            <button class="btn wide lg" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+              Enviar solicitação
+            </button>
+            <p class="msg ok" id="ok" role="status"></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- lista --------------------------------------------------------- -->
+      <div>
+        <div class="head-row" style="margin-bottom:18px">
+          <div><span class="lab ac">Acompanhamento</span><h3 style="font-family:var(--f-disp);font-weight:300;font-size:1.55rem;margin-top:6px">Minhas solicitações</h3></div>
+        </div>
+
+        <div id="lista"></div>
+      </div>
+
+    </div>
+  </section>
+
+</div></main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html"><img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg" alt=""><span><b>Um Pé de IDEIA</b><span class="lab">Arquitetura &amp; Design</span></span></a>
+        <p>Área exclusiva para clientes do escritório: solicitações, anexos e respostas em um só lugar.</p>
+      </div>
+      <div><h4>Navegar</h4><a href="index.html">Início</a><a href="index.html#projetos">Galeria</a><a href="index.html#processo">Processo</a></div>
+      <div><h4>Contato</h4><a href="mailto:aspi@umpedeideia.com.br">aspi@umpedeideia.com.br</a><a href="tel:+5511982916734">(11) 98291-6734</a></div>
+      <div><h4>Equipe</h4><a href="arquiteto.html">Acesso do arquiteto</a></div>
+    </div>
+    <div class="end">
+      <span>© <span id="ano">2026</span> Um Pé de IDEIA</span>
+      <span>Atendimento seg a sex, 9h às 18h</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visualizador de mídia">
+  <button class="x" id="lbX" aria-label="Fechar">✕</button>
+  <button class="nav-b prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <button class="nav-b next" id="lbNext" aria-label="Próximo">›</button>
+  <figure id="lbFig"></figure>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+</body>
+</html>

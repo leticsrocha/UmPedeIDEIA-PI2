@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Área do arquiteto · Um Pé de IDEIA</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7f5f1">
+<link rel="icon" href="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="arquiteto">
+
+<header class="top" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg" alt="">
+      <span><b>Um Pé de IDEIA</b><span class="lab">Painel do arquiteto</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html">Ver o site</a>
+      <a href="cliente.html">Área do cliente</a>
+      <button class="btn out sm keep" id="sair" type="button" hidden>Sair</button>
+    </nav>
+  </div>
+</header>
+
+<main class="page"><div class="wrap">
+
+  <!-- PORTA ------------------------------------------------------------- -->
+  <section id="gate">
+    <div class="login">
+      <div class="art">
+        <img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792139949/WhatsApp_Image_2026-10-16_at_05.34.37.jpg" alt="Residência contemporânea do portfólio">
+        <div class="ov">
+          <span class="lab">Acesso restrito</span>
+          <h2>Painel do escritório</h2>
+          <p>Solicitações recebidas, anexos enviados pelos clientes e respostas — tudo em uma tela só.</p>
+        </div>
+      </div>
+      <div class="form">
+        <span class="lab ac lab-line">Identifique-se</span>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.1rem);margin:10px 0 6px">Área do arquiteto</h2>
+        <p style="font-size:14.6px;margin-bottom:24px">Somente a equipe do escritório tem acesso a esta página.</p>
+        <form id="fGate" novalidate>
+          <label><span class="lab">Usuário</span>
+            <input name="usuario" value="atelier" autocomplete="username" required></label>
+          <label><span class="lab">Senha</span>
+            <input type="password" name="senha" required autocomplete="current-password" placeholder="••••••••"></label>
+          <p class="msg err" id="err" role="alert"></p>
+          <button class="btn wide lg" type="submit">Entrar no painel</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAINEL ------------------------------------------------------------ -->
+  <section id="painel" hidden>
+
+    <div class="panel-top">
+      <div class="user">
+        <img class="avatar" src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792143768/aspi.jpg" alt="" style="object-fit:cover">
+        <div><b>Arqt. Aspí</b><span class="lab">José Henrique de Sousa · CAU A57260-8</span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn soft sm" href="index.html">Ver o site</a>
+        <button class="btn out sm" id="sair2" type="button">Sair</button>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi ac"><span class="lab">Total recebido</span><b id="k1">0</b></div>
+      <div class="kpi"><span class="lab">Novas</span><b id="k2">0</b></div>
+      <div class="kpi"><span class="lab">Em análise</span><b id="k3">0</b></div>
+      <div class="kpi"><span class="lab">Respondidas</span><b id="k4">0</b></div>
+    </div>
+
+    <div class="head-row" style="margin-bottom:18px">
+      <div><span class="lab ac">Caixa de entrada</span><h3 style="font-family:var(--f-disp);font-weight:300;font-size:1.7rem;margin-top:6px">Solicitações recebidas</h3></div>
+    </div>
+
+    <div class="tools">
+      <div class="filters" style="margin-bottom:0" role="group" aria-label="Filtrar por status">
+        <button aria-pressed="true" data-s="all">Todas</button>
+        <button aria-pressed="false" data-s="nova">Novas</button>
+        <button aria-pressed="false" data-s="analise">Em análise</button>
+        <button aria-pressed="false" data-s="respondida">Respondidas</button>
+      </div>
+    </div>
+
+    <div id="lista"></div>
+  </section>
+
+</div></main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html"><img src="https://res.cloudinary.com/p2srhjwx/image/upload/v1792142855/Logo_Um_P%C3%89_deIDEIA.jpg" alt=""><span><b>Um Pé de IDEIA</b><span class="lab">Arquitetura &amp; Design</span></span></a>
+        <p>Painel interno do escritório Um Pé de Ideia.</p>
+      </div>
+      <div><h4>Navegar</h4><a href="index.html">Início</a><a href="index.html#projetos">Galeria</a></div>
+      <div><h4>Cliente</h4><a href="cliente.html">Área do cliente</a></div>
+      <div><h4>Contato</h4><a href="mailto:aspi@umpedeideia.com.br">aspi@umpedeideia.com.br</a></div>
+    </div>
+    <div class="end">
+      <span>© <span id="ano">2026</span> Um Pé de IDEIA</span>
+      <span>Uso interno</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visualizador de mídia">
+  <button class="x" id="lbX" aria-label="Fechar">✕</button>
+  <button class="nav-b prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <button class="nav-b next" id="lbNext" aria-label="Próximo">›</button>
+  <figure id="lbFig"></figure>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+</body>
+</html>
