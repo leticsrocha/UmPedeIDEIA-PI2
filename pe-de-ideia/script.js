@@ -137,16 +137,68 @@ if (page === 'home') {
     { nome: 'Paisagismo', imagens: [ 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134325/Jardim_vertical_1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134390/Port%C3%A3o_corredor.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134152/Jardim_Vertical.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134152/Corredor_entrada.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134143/20151015_114810.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134129/PERDIZES0254.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126238/Marcelo_banco_apto1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7580-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126245/RMB_7643-HDR.jpg',] },
     { nome: 'Desenhos', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792137326/Vale_do_Anhangaba%C3%BA.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136630/IMG_1433.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136650/IMG_1437.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136651/001_projeto_Via_Et%C3%ADlica.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136643/IMG_1435.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136644/IMG_1436.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137060/Hall_1_sem_logo.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137055/PERDIZES0137.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137048/PERDIZES0134.jpg' ] }
   ];
+  // legenda de cada foto, pelo nome do arquivo (a mesma foto pode estar em mais de uma categoria)
+  const legendas = {
+    'PERDIZES0140.jpg': 'Living com poltrona Eames e tijolo aparente',
+    'RMB_7643-HDR.jpg': 'Living integrado a um jardim tropical',
+    'Café_sem_a_mesa.jpg': 'Estar com poltronas de couro e adega embutida',
+    '20171005_134029.jpg': 'Mesa de jantar posta junto à varanda envidraçada',
+    'RMB_7622-HDR.jpg': 'Varanda com mesa redonda e ladrilho hexagonal',
+    'RMB_7744-HDR.jpg': 'Home office para dois em marcenaria amadeirada',
+    'RMB_7732-HDR.jpg': 'Lavabo azul com bancada de madeira maciça',
+    'RMB_7460-HDR.jpg': 'Cozinha com ilha gourmet e coifa central',
+    'Marcelo_banco_apto1.jpg': 'Varanda lounge com futon e grafite urbano',
+    'Café_sem_a_mesa2.jpg': 'Bar e adega com pendentes de filamento',
+    'Cobogó_Marcelo1.jpg': 'Parede de cobogós iluminada à noite',
+    'H_M_Jantar_aberto_dia.jpg': 'Jantar em madeira com parede de tijolinho',
+    'Marcelo_SALA.jpg': 'Escada com guarda-corpo de vidro e ripado iluminado',
+    'RMB_7550-HDR.jpg': 'Estar e jantar com poltronas amarelas',
+    'RMB_7562-HDR.jpg': 'Lareira revestida em pedra e parede 3D',
+    'RMB_7580-HDR.jpg': 'Varanda integrada com jardim vertical',
+    'RMB_7598-HDR.jpg': 'Varanda com mesa redonda e vista da cidade',
+    'RMB_7640-HDR.jpg': 'Ripado de madeira e estante vazada no living',
+    'RMB_7662-HDR.jpg': 'Painel de TV amadeirado e piso que vira ladrilho',
+    'RMB_7475-HDR-2.jpg': 'Ilha branca com pendentes de filamento',
+    'RMB_7457-HDR.jpg': 'Ilha com cooktop e nicho de café iluminado',
+    'PERDIZES0285.jpg': 'Cozinha azul com torre de fornos',
+    'PERDIZES0255.jpg': 'Copa com mesa azul integrada à bancada',
+    'PERDIZES0288.jpg': 'Cozinha em L com armários azuis',
+    'RMB_7466-HDR.jpg': 'Cozinha cinza com ilha e TV embutida',
+    'RMB_7445-HDR.jpg': 'Nicho iluminado entre armários cinza',
+    'RMB_7439-HDR.jpg': 'Cristaleira, ilha e eletros em inox',
+    'RMB_7415-HDR-2.jpg': 'Ilha para refeições com cadeiras de palhinha',
+    'Jardim_vertical_1.jpg': 'Jardim vertical em painel de madeira',
+    'Portão_corredor.jpg': 'Portão-jardim com antúrios e folhagens',
+    'Jardim_Vertical.jpg': 'Jardim vertical em pátio azul',
+    'Corredor_entrada.jpg': 'Corredor de entrada com floreiras e parede de pedra',
+    '20151015_114810.jpg': 'Pergolado com floreira suspensa',
+    'PERDIZES0254.jpg': 'Varanda de leitura com jardim vertical',
+    'Vale_do_Anhangabaú.jpg': 'Vale do Anhangabaú, croqui a nanquim',
+    'IMG_1433.png': 'Croqui de garagem com Jeep e tijolo aparente',
+    'IMG_1437.png': 'Igreja Matriz de Monte Santo (MG) a nanquim',
+    '001_projeto_Via_Etílica.jpg': 'Croqui da loja Via Etílica vista da rua',
+    'IMG_1435.png': 'Casa com volume suspenso e árvore, croqui',
+    'IMG_1436.png': 'Residência em balanço junto à rua em curva',
+    'Hall_1_sem_logo.jpg': 'Hall com mural ilustrado à mão',
+    'PERDIZES0137.jpg': 'Hall revestido de ilustração urbana',
+    'PERDIZES0134.jpg': 'Porta ilustrada abrindo para o hall'
+  };
+  const legendaDe = (src, nome, i) =>
+    legendas[decodeURIComponent(src.split('/').pop())] || `${nome} ${String(i + 1).padStart(2, '0')}`;
+
   const cardsRoot = $('#cards');
   categorias.forEach(({ nome, imagens }) => imagens.forEach((src, i) => {
-    const legenda = `${nome} ${String(i + 1).padStart(2, '0')}`;
+    const legenda = legendaDe(src, nome, i);
     const card = document.createElement('article');
     card.className = 'card';
     card.dataset.cat = nome;
     card.innerHTML = `<div class="fig" data-lb="${esc(src)}" data-cap="${esc(legenda)}">
       ${src ? `<img src="${esc(src)}" alt="${esc(legenda)}" loading="lazy">` : `<span class="slot">Imagem ${String(i + 1).padStart(2, '0')}<small>Substitua o link no script.js</small></span>`}
-      <span class="tag">${esc(legenda)}</span>
+      <span class="leg">${esc(legenda)}</span>
     </div>`;
+    // fotos em pé ocupam duas linhas do mosaico
+    const img = $('img', card);
+    if (img) img.onload = () => card.classList.toggle('tall', img.naturalHeight > img.naturalWidth * 1.1);
     cardsRoot.append(card);
   }));
 
@@ -154,6 +206,9 @@ if (page === 'home') {
   const filtra = b => {
     btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     cards.forEach(c => c.classList.toggle('hide', c.dataset.cat !== b.dataset.f));
+    // a primeira foto da categoria ganha destaque no mosaico
+    cards.forEach(c => c.classList.remove('big'));
+    cards.find(c => !c.classList.contains('hide'))?.classList.add('big');
   };
   btns.forEach(b => b.onclick = () => filtra(b));
   filtra(btns.find(b => b.getAttribute('aria-pressed') === 'true') || btns[0]);

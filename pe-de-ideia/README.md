@@ -18,7 +18,7 @@ python3 -m http.server 8000
 
 | Arquivo | O que é |
 |---|---|
-| `index.html` | Site institucional: hero, escritório, serviços, processo, comparador croqui × obra, galeria com filtros e lightbox, depoimentos, FAQ e contato. |
+| `index.html` | Site institucional: hero, escritório, equipe, galeria em mosaico (filtros, legendas e lightbox), comparador croqui × obra, serviços com etapas e contato. |
 | `cliente.html` | Área do cliente: login, cadastro, recuperação de senha, formulário simples com **anexos (fotos, vídeos e PDFs)** e acompanhamento das solicitações e respostas. |
 | `arquiteto.html` | Painel interno: caixa de entrada, filtros por status, visualização dos anexos e resposta ao cliente. |
 | `style.css` | Folha de estilo única, dividida em 10 blocos comentados. |
@@ -69,7 +69,8 @@ por URLs externas do Cloudinary. Os arquivos enviados por clientes continuam
 sendo processados no navegador; em produção, devem ser armazenados por uma API
 ou serviço de arquivos.
 
-Os textos de depoimentos, números e dados de contato também são fictícios.
+Os números e dados de contato também são fictícios. As legendas da galeria ficam
+em `legendas` (bloco 04 de `script.js`), indexadas pelo nome do arquivo da foto.
 
 ## Para virar um site real
 
