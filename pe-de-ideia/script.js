@@ -482,6 +482,7 @@ if (page === 'cliente') {
             <span class="lab ac">Resposta do Arqt. Aspí · ${fmtData(r.respostaData || r.data)}</span>
             <p>${esc(r.resposta)}</p>
           </div>` : `<p class="hint" style="margin-top:14px">Sua solicitação está na fila do escritório. O retorno costuma sair em até 48 horas úteis.</p>`}
+        <div class="acts2"><button class="btn out sm" data-a="del" type="button">Excluir solicitação</button></div>
       </article>`).join('')
       : `<div class="empty">
           <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M14 4v6h6M8 14h8M8 18h5"/></svg></span>
@@ -490,10 +491,18 @@ if (page === 'cliente') {
         </div>`;
   };
 
-  /* ver anexos das solicitações */
+  /* ver anexos e excluir solicitações */
   $('#lista').addEventListener('click', e => {
+    const art = e.target.closest('.req'); if (!art) return;
+    const r = minhas().find(x => String(x.id) === art.dataset.id); if (!r) return;
+
+    if (e.target.closest('button[data-a="del"]')) {
+      if (!confirm('Excluir esta solicitação? O escritório deixará de vê-la e a ação não pode ser desfeita.')) return;
+      save(load().filter(x => String(x.id) !== String(r.id)));
+      desenha(); toast('Solicitação excluída');
+      return;
+    }
     const fig = e.target.closest('.file'); if (!fig) return;
-    const r = minhas().find(x => String(x.id) === e.target.closest('.req').dataset.id);
     abreAnexos(r.anexos, r.anexos.findIndex(a => a.id === fig.dataset.id));
   });
 

@@ -547,10 +547,11 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .tools .search input{padding-left:40px}
 .tools .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--mut);fill:none;stroke-width:1.6}
 
-/* toast */
-.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,120%);z-index:95;background:var(--dark);color:#fff;
-  padding:14px 20px;border-radius:99px;box-shadow:var(--sh-3);font-size:14px;display:flex;align-items:center;gap:10px;transition:transform .45s var(--ease);max-width:90vw}
-.toast.show{transform:translate(-50%,0)}
+/* toast: fica escondido fora da tela até receber .show (vazio, aparecia como uma bolinha preta no rodapé) */
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,calc(100% + 40px));z-index:95;background:var(--dark);color:#fff;
+  padding:14px 20px;border-radius:99px;box-shadow:var(--sh-3);font-size:14px;display:flex;align-items:center;gap:10px;max-width:90vw;
+  visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s}
+.toast.show{transform:translate(-50%,0);visibility:visible;transition:transform .45s var(--ease)}
 .toast b{color:var(--accent);font-weight:500}
 
 /* impressão */
