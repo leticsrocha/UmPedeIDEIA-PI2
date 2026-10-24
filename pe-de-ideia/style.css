@@ -152,7 +152,8 @@ strong{font-weight:600;color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
-  *{animation-duration:.001s!important}
+  /* sem iteration-count:1, a faixa animada (infinite) dava uma volta a cada 1 ms */
+  *{animation-duration:.001s!important;animation-iteration-count:1!important}
 }
 
 /* 03. CABEÇALHO =========================================================== */
