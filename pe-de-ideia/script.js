@@ -369,6 +369,12 @@ const srcDe = a => a.src || a._url || urlsSessao.get(a.id) || null;
 
 const svgDoc = `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>`;
 const svgFilm = `<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 10h4M17 10h4M3 15h4M17 15h4"/></svg>`;
+const svgWa = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35m-5.42 7.4a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.83 9.83 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></svg>`;
+/* telefone brasileiro → número do wa.me (com DDI 55) ou null */
+const foneWa = f => {
+  const d = String(f || '').replace(/\D/g, '');
+  return d.length === 10 || d.length === 11 ? '55' + d : d.length >= 12 ? d : null;
+};
 
 /* miniatura de um anexo */
 function cardAnexo(a, { remover = false } = {}) {
@@ -478,10 +484,14 @@ if (page === 'cliente') {
             <span class="lab">${r.anexos.length} anexo(s) enviados</span>
             <div class="files">${r.anexos.map(a => cardAnexo(a)).join('')}</div>
           </div>` : ''}
+        ${r.whats ? `<div class="answer wa-box">
+            <span class="lab">${svgWa} WhatsApp · ${fmtData(r.whats)}</span>
+            <p>Um arquiteto da nossa equipe vai entrar em contato pelo seu WhatsApp${r.fone ? ` ${esc(r.fone)}` : ''} para conversar sobre o projeto. Fique de olho nas mensagens!</p>
+          </div>` : ''}
         ${r.resposta ? `<div class="answer">
-            <span class="lab ac">Resposta do Arqt. Aspí · ${fmtData(r.respostaData || r.data)}</span>
+            <span class="lab ac">Resposta da equipe · ${fmtData(r.respostaData || r.data)}</span>
             <p>${esc(r.resposta)}</p>
-          </div>` : `<p class="hint" style="margin-top:14px">Sua solicitação está na fila do escritório. O retorno costuma sair em até 48 horas úteis.</p>`}
+          </div>` : r.whats ? '' : `<p class="hint" style="margin-top:14px">Sua solicitação está na fila do escritório. O retorno costuma sair em até 48 horas úteis.</p>`}
         <div class="acts2"><button class="btn out sm" data-a="del" type="button">Excluir solicitação</button></div>
       </article>`).join('')
       : `<div class="empty">
@@ -672,6 +682,14 @@ if (page === 'arquiteto') {
   const dados = () => load().sort((a, b) =>
     (ORDEM[a.status] - ORDEM[b.status]) || (b.data - a.data));
 
+  // abre a conversa no WhatsApp do cliente com uma mensagem pronta
+  const linkWa = r => {
+    const n = foneWa(r.fone);
+    if (!n) return `<button class="btn sm wa" type="button" disabled title="O cliente não informou telefone">${svgWa} Sem WhatsApp</button>`;
+    const msg = `Olá, ${r.nome.split(' ')[0]}! Aqui é da equipe do escritório Um Pé de IDEIA. Recebemos sua solicitação (${r.tipo} · ${r.local}) e gostaríamos de conversar sobre o projeto.`;
+    return `<a class="btn sm wa" data-a="wa" href="https://wa.me/${n}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${svgWa} WhatsApp do cliente</a>`;
+  };
+
   const desenha = () => {
     const on = dentro();
     $('#gate').hidden = on; $('#painel').hidden = !on;
@@ -711,8 +729,10 @@ if (page === 'arquiteto') {
         <div class="acts2">
           <button class="btn soft sm" data-a="analise" type="button">Marcar em análise</button>
           <button class="btn sm" data-a="resp" type="button">Enviar resposta</button>
+          ${linkWa(r)}
           <button class="btn out sm" data-a="del" type="button">Excluir</button>
         </div>
+        ${r.whats ? `<p class="hint" style="margin-top:10px">Contato pelo WhatsApp iniciado em ${fmtHora(r.whats)} · o cliente foi avisado na área dele.</p>` : ''}
       </article>`).join('')
       : `<div class="empty">
           <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
@@ -730,10 +750,19 @@ if (page === 'arquiteto') {
       abreAnexos(r.anexos, r.anexos.findIndex(a => a.id === fig.dataset.id));
       return;
     }
-    const b = e.target.closest('button[data-a]'); if (!b) return;
+    const b = e.target.closest('[data-a]'); if (!b) return;
     const ta = $('textarea', art), txt = ta.value.trim();
     let l = load();
     const r = l.find(x => String(x.id) === art.dataset.id);
+
+    if (b.dataset.a === 'wa') {
+      // o link segue para o WhatsApp; aqui só registramos o aviso para o cliente
+      r.whats = Date.now(); r.resposta = txt;
+      if (r.status === 'nova') r.status = 'analise';
+      save(l); setTimeout(desenha);     // redesenhar já removeria o link antes de abrir
+      toast('Cliente avisado: <b>contato pelo WhatsApp</b>');
+      return;
+    }
 
     if (b.dataset.a === 'del') {
       if (!confirm('Excluir esta solicitação? A ação não pode ser desfeita.')) return;
@@ -759,7 +788,7 @@ if (page === 'arquiteto') {
     const f = new FormData(e.target);
     if ((f.get('usuario') || '').trim().toLowerCase() === USUARIO && f.get('senha') === SENHA) {
       sessionStorage.setItem('pedi_arq', '1'); $('#err').textContent = '';
-      desenha(); toast('Bem-vindo de volta, <b>Arqt. Aspí</b>');
+      desenha(); toast('Bem-vindo ao <b>painel do escritório</b>');
     } else {
       $('#err').textContent = 'Usuário ou senha incorretos. Tente novamente.';
     }

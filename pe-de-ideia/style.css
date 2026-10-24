@@ -122,6 +122,7 @@ strong{font-weight:600;color:var(--ink)}
 .btn.lg{padding:18px 30px;font-size:13px}
 .btn.wide{width:100%;justify-content:center}
 .btn[disabled]{opacity:.45;pointer-events:none}
+.btn.wa{--bg-b:#25d366;--fg-b:var(--ink)}
 .dark .btn.out{--fg-b:#fff;border-color:rgba(255,255,255,.28)}
 
 /* prancha de desenho */
@@ -531,6 +532,9 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .track .tx span.on{color:var(--brown)}
 .answer{background:var(--bg-2);border-left:3px solid var(--brown);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:16px 18px;margin-top:18px}
 .answer p{color:var(--ink-2);font-size:14.6px;margin-top:6px;white-space:pre-wrap}
+.wa-box{border-left-color:#25d366;background:#e7f8ee}
+.wa-box .lab{display:flex;align-items:center;gap:7px;color:#13733a}
+.wa-box .lab svg{width:15px;height:15px}
 .att{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-2)}
 .att .files{margin-top:12px}
 .att .file{cursor:zoom-in}
@@ -556,3 +560,15 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 
 /* impressão */
 @media print{.top,.ticker,footer,.btn,.drawer{display:none!important}body::before{display:none}}
+
+/* WhatsApp flutuante (home): só o ícone, discreto */
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;background:var(--paper);color:#1fa855;border:1px solid var(--line);
+  box-shadow:var(--sh-1);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.wa-float:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+.wa-float svg{width:22px;height:22px}
+
+/* VLibras: o botão fica no meio da lateral direita, em cima da seta "próximo" do
+   visualizador de fotos. O widget mora num shadow DOM, então subimos o contêiner
+   externo; com transform ele vira a referência do position:fixed interno. */
+#vlibras-access-wrapper{position:fixed;top:0;right:0;width:0;height:0;z-index:2147483639;transform:translateY(-22vh)}
