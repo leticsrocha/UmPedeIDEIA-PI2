@@ -85,6 +85,42 @@ const toast = (txt, ms = 3600) => {
   }
 })();
 
+/* carrossel de feedbacks ================================================= */
+(() => {
+  const track = $('#feedbackTrack'), prev = $('#feedbackPrev'), next = $('#feedbackNext');
+  if (!track || !prev || !next) return;
+  const cards = $$('.feedback-card', track);
+  if (!cards.length) return;
+  let atual = 0;
+
+  const mostra = indice => {
+    atual = (indice + cards.length) % cards.length;
+    cards.forEach((card, i) => {
+      card.classList.remove('is-active', 'is-prev', 'is-next');
+      card.removeAttribute('aria-current');
+      if (i === atual) {
+        card.classList.add('is-active');
+        card.setAttribute('aria-current', 'true');
+      } else if (i === (atual - 1 + cards.length) % cards.length) {
+        card.classList.add('is-prev');
+      } else if (i === (atual + 1) % cards.length) {
+        card.classList.add('is-next');
+      }
+    });
+  };
+
+  prev.addEventListener('click', () => mostra(atual - 1));
+  next.addEventListener('click', () => mostra(atual + 1));
+  cards.forEach((card, i) => card.addEventListener('click', () => {
+    if (card.classList.contains('is-prev') || card.classList.contains('is-next')) mostra(i);
+  }));
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { mostra(atual - 1); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { mostra(atual + 1); e.preventDefault(); }
+  });
+  mostra(atual);
+})();
+
 /* 03. LIGHTBOX ============================================================ */
 const LB = (() => {
   const box = $('#lb'); if (!box) return { open: () => {} };
@@ -132,12 +168,14 @@ const LB = (() => {
 if (page === 'home') {
   const categorias = [
     { nome: 'Destaques', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792131151/PERDIZES0140.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126245/RMB_7643-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126246/Caf%C3%A9_sem_a_mesa.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126244/20171005_134029.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126244/RMB_7622-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126244/RMB_7744-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126241/RMB_7732-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126240/RMB_7460-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126238/Marcelo_banco_apto1.jpg'] },
-    { nome: 'Salas e Varandas', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792126244/20171005_134029.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126246/Caf%C3%A9_sem_a_mesa.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/Caf%C3%A9_sem_a_mesa2.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/Cobog%C3%B3_Marcelo1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131656/H_M_Jantar_aberto_dia.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126238/Marcelo_banco_apto1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131658/Marcelo_SALA.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131151/PERDIZES0140.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/RMB_7550-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7562-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7580-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131665/RMB_7598-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131662/RMB_7640-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131665/RMB_7662-HDR.jpg' ] },
+    { nome: 'Salas e Varandas', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792126244/20171005_134029.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126246/Caf%C3%A9_sem_a_mesa.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/Caf%C3%A9_sem_a_mesa2.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/Cobog%C3%B3_Marcelo1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131656/H_M_Jantar_aberto_dia.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793925000/H_M_Jantar_fechado_dia_COM_LOGO.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126238/Marcelo_banco_apto1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131658/Marcelo_SALA.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131151/PERDIZES0140.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131660/RMB_7550-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7562-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7580-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131665/RMB_7598-HDR.jpg',  'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131662/RMB_7640-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131665/RMB_7662-HDR.jpg' ] },
     { nome: 'Cozinhas', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792132926/RMB_7475-HDR-2.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792132909/RMB_7457-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792133509/PERDIZES0285.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792133526/PERDIZES0255.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792133508/PERDIZES0288.jpg','https://res.cloudinary.com/p2srhjwx/image/upload/v1792132909/RMB_7466-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792132908/RMB_7445-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792132907/RMB_7439-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792132907/RMB_7415-HDR-2.jpg'] },
+    { nome: 'Banheiros', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1793916220/RMB_7342-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916220/RMB_7339-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916221/RMB_7403-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916232/20170818_190743.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916235/20170725_173927.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916453/PERDIZES0035.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916917/PERDIZES0319.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916637/PERDIZES0106.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793916524/PERDIZES0093.jpg'] },
+    { nome: 'Quartos', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1793918594/Suite_3_sem_logo.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918506/Closet_1_sem_logo.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918499/PERDIZES0009.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918486/PERDIZES0026.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918483/RMB_7375-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918482/RMB_7372-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918481/RMB_7366-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918480/RMB_7363-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918466/RMB_7309-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918465/RMB_7297-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918464/RMB_7288-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918463/RMB_7273-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918462/PERDIZES0075.jpg' ,'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918450/RMB_7393-HDR.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918449/H_M_%C3%81rvore_Brinquedoteca.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793918449/H_M_%C3%81rvore_Brinquedoteca_2.jpg' ] },
     { nome: 'Paisagismo', imagens: [ 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134325/Jardim_vertical_1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134390/Port%C3%A3o_corredor.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134152/Jardim_Vertical.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134152/Corredor_entrada.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134143/20151015_114810.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792134129/PERDIZES0254.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126238/Marcelo_banco_apto1.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792131661/RMB_7580-HDR.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792126245/RMB_7643-HDR.jpg',] },
-    { nome: 'Desenhos', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792137326/Vale_do_Anhangaba%C3%BA.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136630/IMG_1433.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136650/IMG_1437.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136651/001_projeto_Via_Et%C3%ADlica.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136643/IMG_1435.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136644/IMG_1436.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137060/Hall_1_sem_logo.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137055/PERDIZES0137.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137048/PERDIZES0134.jpg' ] }
+    { nome: 'Desenhos', imagens: ['https://res.cloudinary.com/p2srhjwx/image/upload/v1792137326/Vale_do_Anhangaba%C3%BA.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136630/IMG_1433.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136650/IMG_1437.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136651/001_projeto_Via_Et%C3%ADlica.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136643/IMG_1435.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136644/IMG_1436.png', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137060/Hall_1_sem_logo.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137055/PERDIZES0137.jpg', 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792137048/PERDIZES0134.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793925401/Perspectiva_2.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793925576/IMG_002.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793925644/IMG.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136630/IMG_1431.png' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1792136629/IMG_1430.png' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793926315/IMG_011a.jpg' , 'https://res.cloudinary.com/p2srhjwx/image/upload/v1793926315/IMG_013a.jpg' ] }
   ];
-  // legenda de cada foto, pelo nome do arquivo (a mesma foto pode estar em mais de uma categoria)
+
   const legendas = {
     'PERDIZES0140.jpg': 'Living com poltrona Eames e tijolo aparente',
     'RMB_7643-HDR.jpg': 'Living integrado a um jardim tropical',
@@ -146,6 +184,31 @@ if (page === 'home') {
     'RMB_7622-HDR.jpg': 'Varanda com mesa redonda e ladrilho hexagonal',
     'RMB_7744-HDR.jpg': 'Home office para dois em marcenaria amadeirada',
     'RMB_7732-HDR.jpg': 'Lavabo azul com bancada de madeira maciça',
+    'Suite_3_sem_logo.jpg': 'Suíte com cabeceira escura, cortinas amplas e iluminação indireta',
+    'Closet_1_sem_logo.jpg': 'Portas espelhadas e marcenaria planejada',
+    'PERDIZES0009.jpg': 'Cama de casal, cabeceira estofada e piso de madeira',
+    'PERDIZES0026.jpg': 'Suíte com marcenaria sob medida',
+    'RMB_7375-HDR.jpg': 'Quarto infantil com cama de estampa divertida e parede ilustrada',
+    'RMB_7372-HDR.jpg': 'Bancada de estudos e armários coloridos',
+    'RMB_7366-HDR.jpg': 'Bancada de estudos integrada à marcenaria colorida do quarto infantil',
+    'RMB_7363-HDR.jpg': 'Camas baixas, painel de madeira e armários coloridos',
+    'RMB_7309-HDR.jpg': 'Suíte com cabeceira estofada, painel ripado e armários espelhados',
+    'RMB_7297-HDR.jpg': 'Cama em tons suaves e armários espelhados',
+    'RMB_7288-HDR.jpg': 'Quarto de casal com cabeceira estofada e painel ripado de madeira',
+    'RMB_7273-HDR.jpg': 'Suíte com painel ripado, closet espelhado e cortinas do piso ao teto',
+    'PERDIZES0075.jpg': 'Quarto infantil claro com cômoda branca e armário espelhado',
+    'RMB_7393-HDR.jpg': 'Camas e marcenaria azul e amadeirada',
+    'H_M_Árvore_Brinquedoteca.jpg': 'Quarto infantil com mural de árvore, nichos e cama integrada',
+    'H_M_Árvore_Brinquedoteca_2.jpg': 'Quarto infantil com cama, armários coloridos e iluminação embutida',
+    'RMB_7342-HDR.jpg': 'Box em mármore, nicho embutido e metais acobreados',
+    'RMB_7339-HDR.jpg': 'Bancada ampla, espelho e box revestido em mármore claro',
+    'RMB_7403-HDR.jpg': 'Gabinete cinza e revestimento azul no box',
+    '20170818_190743.jpg': 'Lavabo com bancada de madeira, revestimento texturizado e iluminação indireta',
+    '20170725_173927.jpg': 'Bancada de mármore escuro com espelho iluminado e revestimento bege',
+    'PERDIZES0035.jpg': 'Bancada escura, gabinete amadeirado e box com revestimento geométrico',
+    'PERDIZES0319.jpg': 'Gabinete rosa, bancada branca e parede de pastilhas',
+    'PERDIZES0106.jpg': 'Lavabo com bancada de mármore escuro e iluminação indireta',
+    'PERDIZES0093.jpg': 'Banheiro claro com bancada branca, gabinete amadeirado e box de vidro',
     'RMB_7460-HDR.jpg': 'Cozinha com ilha gourmet e coifa central',
     'Marcelo_banco_apto1.jpg': 'Varanda lounge com futon e grafite urbano',
     'Café_sem_a_mesa2.jpg': 'Bar e adega com pendentes de filamento',
@@ -174,11 +237,18 @@ if (page === 'home') {
     '20151015_114810.jpg': 'Pergolado com floreira suspensa',
     'PERDIZES0254.jpg': 'Varanda de leitura com jardim vertical',
     'Vale_do_Anhangabaú.jpg': 'Vale do Anhangabaú, croqui a nanquim',
-    'IMG_1433.png': 'Croqui de garagem com Jeep e tijolo aparente',
+    'IMG_1433.png': 'Garagem com Jeep e tijolo aparente',
     'IMG_1437.png': 'Igreja Matriz de Monte Santo (MG) a nanquim',
     '001_projeto_Via_Etílica.jpg': 'Croqui da loja Via Etílica vista da rua',
     'IMG_1435.png': 'Casa com volume suspenso e árvore, croqui',
     'IMG_1436.png': 'Residência em balanço junto à rua em curva',
+    'Perspectiva_2.jpg': 'Sala integrada com planta baixa e perspectiva do ambiente',
+    'IMG_002.jpg': 'Pátio com cozinha externa, bancada e balanços',
+    'IMG.jpg': 'Cozinha integrada à sala de jantar com mesa e pendentes',
+    'IMG_1431.png': 'Sala de estar integrada à cozinha com sofá e bancada',
+    'IMG_1430.png': 'Sala de jantar com mesa e estante divisória',
+    'IMG_011a.jpg': 'Bar com balcão, banquetas e vista para o estádio',
+    'IMG_013a.jpg': 'Interior comercial com balcão, mesas e iluminação',
     'Hall_1_sem_logo.jpg': 'Hall com mural ilustrado à mão',
     'PERDIZES0137.jpg': 'Hall revestido de ilustração urbana',
     'PERDIZES0134.jpg': 'Porta ilustrada abrindo para o hall'
